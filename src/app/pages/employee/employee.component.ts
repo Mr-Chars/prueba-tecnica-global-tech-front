@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { EmployeeService } from '../../services/employee.service';
+import { EMPLOYEE } from '../../interfaces/generals.interface';
 
 @Component({
   selector: 'app-employee',
@@ -14,7 +15,7 @@ import { EmployeeService } from '../../services/employee.service';
 export class EmployeeComponent implements OnInit {
   wordSearched = '';
 
-  employees = [];
+  employees: Array<EMPLOYEE> = [];
   constructor(
     public readonly employeeService: EmployeeService,
   ) { }
@@ -32,7 +33,8 @@ export class EmployeeComponent implements OnInit {
     try {
       const response = await firstValueFrom(this.employeeService.getEmployee(dataToRequest));
       console.log(response);
-      // this.employees =
+      this.employees = response.employees.data;
+      console.log(this.employees);
 
       // this.searchProduct();
     } catch (error) {
@@ -42,6 +44,14 @@ export class EmployeeComponent implements OnInit {
   }
 
   add() {
+
+  }
+
+  update(employee: EMPLOYEE) {
+
+  }
+
+  delete(id: string) {
 
   }
 }

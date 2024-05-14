@@ -12,34 +12,38 @@
                     <th>Nombres</th>
                     <th>Primer apellido</th>
                     <th>Segundo apellido</th>
-                    <th>País de empleo</th>
                     <th>Tipo de identificación</th>
                     <th>Código de identificación</th>
+                    <th>País del empleo</th>
+                    <th>Correo electrónico</th>
                     <th>Fecha de admisión</th>
                     <th>Área</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
-            <!-- <tbody>
-                <ng-container *ngFor="let product of products; index as i" class="">
+            <tbody>
+                <ng-container *ngFor="let employee of employees; index as i" class="">
                     <tr>
-                        <td>{{product.logo}}</td>
-                        <td>{{product.name}}</td>
-                        <td>{{product.description}}</td>
-                        <td>{{product.date_release | date: 'yyyy/MM/dd'}}</td>
-                        <td>{{product.date_revision| date: 'yyyy/MM/dd'}}</td>
+                        <td>{{employee.first_name}} {{employee.other_names}}</td>
+                        <td>{{employee.lastname}}</td>
+                        <td>{{employee.second_lastname}}</td>
+                        <td>{{employee.type_identification}}</td>
+                        <td>{{employee.code_identification}}</td>
+                        <td>{{employee.country_employment}}</td>
+                        <td>{{employee.email}}</td>
+                        <td>{{employee.date_admission}}</td>
+                        <td>{{employee.area}}</td>
                         <td>
-                            <div class="box-btn-dropdown">
-                                <img src="assets/svgs/three-dots-vertical.svg" alt="three-dots-vertical"
-                                    class="options-product">
-                                <ul class="ul-list-options-dropdown">
-                                    <li (click)="edit(product.id)">Editar</li>
-                                    <li (click)="delete(product.id)">Eliminar</li>
-                                </ul>
-                            </div>
+                            <a (click)="update(employee)" class="">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                            <a (click)="delete(employee.id)" class="danger p-0 m-1">
+                                <i class="fa fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 </ng-container>
-            </tbody> -->
+            </tbody>
         </table>
 
         <!-- <div class="container-options">
