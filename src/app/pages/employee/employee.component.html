@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="container-search">
+        <input type="text" class="input-search" (keyup)="searchEmployee()" [(ngModel)]="wordSearched"
+            name="wordSearched" placeholder="Search...">
+
+        <button class="btn-primary btn-add" (click)="add()">Agregar</button>
+    </div>
+    <div class="container-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Primer apellido</th>
+                    <th>Segundo apellido</th>
+                    <th>País de empleo</th>
+                    <th>Tipo de identificación</th>
+                    <th>Código de identificación</th>
+                    <th>Fecha de admisión</th>
+                    <th>Área</th>
+                </tr>
+            </thead>
+            <!-- <tbody>
+                <ng-container *ngFor="let product of products; index as i" class="">
+                    <tr>
+                        <td>{{product.logo}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.description}}</td>
+                        <td>{{product.date_release | date: 'yyyy/MM/dd'}}</td>
+                        <td>{{product.date_revision| date: 'yyyy/MM/dd'}}</td>
+                        <td>
+                            <div class="box-btn-dropdown">
+                                <img src="assets/svgs/three-dots-vertical.svg" alt="three-dots-vertical"
+                                    class="options-product">
+                                <ul class="ul-list-options-dropdown">
+                                    <li (click)="edit(product.id)">Editar</li>
+                                    <li (click)="delete(product.id)">Eliminar</li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody> -->
+        </table>
+
+        <!-- <div class="container-options">
+            <span>{{getQuantityProduct()}}</span>
+            <select (change)="searchProduct()" [(ngModel)]="paginationQuantity" class="select-pagination">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div> -->
+    </div>
+</div>
