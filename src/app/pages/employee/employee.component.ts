@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { EmployeeService } from '../../services/employee.service';
 import { EMPLOYEE } from '../../interfaces/generals.interface';
+import { COLORS, MESSAGES, OPTIONS_FILTER, RANDOMS, ROUTES } from '../../contants/generals';
+import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -13,11 +16,15 @@ import { EMPLOYEE } from '../../interfaces/generals.interface';
   styleUrl: './employee.component.css'
 })
 export class EmployeeComponent implements OnInit {
-  wordSearched = '';
+  wordToFind = '';
+  filterBy = 'first_name';
+
+  optionsFilter = OPTIONS_FILTER;
 
   employees: Array<EMPLOYEE> = [];
   constructor(
     public readonly employeeService: EmployeeService,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -26,32 +33,48 @@ export class EmployeeComponent implements OnInit {
 
   async searchEmployee(pagination_step = 1) {
     const dataToRequest = {
-      where: '',
+      where: JSON.stringify([
+        ['employees.' + this.filterBy, 'like', '%' + this.wordToFind + '%',]
+      ]),
       pagination_itemQuantity: 10,
       pagination_step,
     };
     try {
       const response = await firstValueFrom(this.employeeService.getEmployee(dataToRequest));
-      console.log(response);
       this.employees = response.employees.data;
-      console.log(this.employees);
-
-      // this.searchProduct();
     } catch (error) {
       console.log(error);
-      // this.products = [];
+      this.employees = [];
     }
   }
 
   add() {
-
+    this.router.navigate([`/${ROUTES.manageEmployee}/`]);
   }
 
-  update(employee: EMPLOYEE) {
-
+  update(id: string) {
+    this.router.navigate([`/${ROUTES.manageEmployee}/${id}`]);
   }
 
-  delete(id: string) {
+  async delete(id: string) {
+    swal.fire({
+      title: ' ',
+      text: `${MESSAGES.deletingEmployee}`,
+      showCancelButton: true,
+      confirmButtonColor: COLORS.yellow_1,
+      cancelButtonColor: COLORS.gray_1,
+      confirmButtonText: RANDOMS.confirm
+    }).then(async (result) => {
 
+      if (result.value) {
+        try {
+          await firstValueFrom(this.employeeService.delete(id));
+        } catch (error) {
+        } finally {
+          this.wordToFind = '';
+          this.searchEmployee();
+        }
+      }
+    });
   }
 }

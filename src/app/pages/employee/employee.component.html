@@ -1,7 +1,12 @@
 <div class="container">
     <div class="container-search">
-        <input type="text" class="input-search" (keyup)="searchEmployee()" [(ngModel)]="wordSearched"
-            name="wordSearched" placeholder="Search...">
+        <input type="text" class="input-search" (keyup)="searchEmployee()" [(ngModel)]="wordToFind" name="wordSearched"
+            placeholder="Search...">
+        <select [(ngModel)]="filterBy" name="filterBy" (change)="searchEmployee()">
+            <option *ngFor="let optionFilter of optionsFilter; index as i" value="{{optionFilter['key']}}">
+                {{optionFilter['value']}}
+            </option>
+        </select>
 
         <button class="btn-primary btn-add" (click)="add()">Agregar</button>
     </div>
@@ -34,7 +39,7 @@
                         <td>{{employee.date_admission}}</td>
                         <td>{{employee.area}}</td>
                         <td>
-                            <a (click)="update(employee)" class="">
+                            <a (click)="update(employee.id)" class="">
                                 <i class="fa fa-pencil-square-o"></i>
                             </a>
                             <a (click)="delete(employee.id)" class="danger p-0 m-1">

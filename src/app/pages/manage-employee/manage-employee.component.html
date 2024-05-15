@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="container-head">
+        <h1>Formulario de registro</h1>
+    </div>
+    <form [formGroup]="employeeForm" autocomplete="off" (ngSubmit)="save()">
+        <div class="responsive-two-columns">
+            <!-- <div class="container-item">
+                <label class="label-input" for="id">Id</label>
+                <input autocomplete="off" type="text" (focusout)="checkIfIdExist()" id="id" class="input-style-1"
+                    name="id" formControlName="id">
+                <span class="display-errors" *ngIf="!isIdProductValid">El id ingresado ya se encuentra en uso.</span>
+                <div *ngIf="productForm.controls.id.invalid && (productForm.controls.id.dirty || productForm.controls.id.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="productForm.controls.id.errors"></app-display-errors-validation-input>
+                </div>
+            </div> -->
+            <div class="container-item">
+                <label class="label-input" for="lastname">Primer apellido</label>
+                <input autocomplete="off" type="text" class="input-style-1" name="lastname" formControlName="lastname">
+                <div *ngIf="employeeForm.controls.lastname.invalid && (employeeForm.controls.lastname.dirty || employeeForm.controls.lastname.touched)"
+                    class="display-errors">
+                    <!-- <app-display-errors-validation-input
+                        [type]="productForm.controls.name.errors"></app-display-errors-validation-input> -->
+                </div>
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="second_lastname">Segundo apellido</label>
+                <input autocomplete="off" type="text" class="input-style-1" name="second_lastname"
+                    formControlName="second_lastname">
+                <!-- <div *ngIf="employeeForm.controls.second_lastname.invalid && (employeeForm.controls.second_lastname.dirty || employeeForm.controls.second_lastname.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.second_lastname.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="first_name">Primer nombre</label>
+                <input autocomplete="off" type="text" class="input-style-1" name="first_name"
+                    formControlName="first_name">
+                <!-- <div *ngIf="employeeForm.controls.first_name.invalid && (employeeForm.controls.first_name.dirty || employeeForm.controls.first_name.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.first_name.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="other_names">Otros nombres</label>
+                <input autocomplete="off" type="text" class="input-style-1" name="other_names"
+                    formControlName="other_names">
+                <!-- <div *ngIf="employeeForm.controls.other_names.invalid && (employeeForm.controls.other_names.dirty || employeeForm.controls.other_names.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.other_names.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="country_employment">Pais del empleo</label>
+                <select name="country_employment" class="input-style-1" formControlName="country_employment">
+                    <option *ngFor="let country of countriesEmployeers; index as i" value="{{country['key']}}">
+                        {{country['value']}}
+                    </option>
+                </select>
+                <!-- <div *ngIf="employeeForm.controls.country_employment.invalid && (employeeForm.controls.country_employment.dirty || employeeForm.controls.country_employment.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.country_employment.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="type_identification">Tipo de identificación</label>
+                <select name="type_identification" class="input-style-1" formControlName="type_identification">
+                    <option *ngFor="let type_id of type_identification; index as i" value="{{type_id['key']}}">
+                        {{type_id['value']}}
+                    </option>
+                </select>
+                <!-- <div *ngIf="employeeForm.controls.type_identification.invalid && (employeeForm.controls.type_identification.dirty || employeeForm.controls.type_identification.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.type_identification.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="code_identification">Código de identificación</label>
+                <input autocomplete="off" type="text" class="input-style-1" name="code_identification"
+                    formControlName="code_identification">
+                <!-- <div *ngIf="employeeForm.controls.code_identification.invalid && (employeeForm.controls.code_identification.dirty || employeeForm.controls.code_identification.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.code_identification.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="date_admission">Fecha de admisión</label>
+                <input autocomplete="off" (change)="checkDateAdmission()" type="date" class="input-style-1"
+                    name="date_admission" formControlName="date_admission">
+                <!-- <div *ngIf="employeeForm.controls.date_admission.invalid && (employeeForm.controls.date_admission.dirty || employeeForm.controls.date_admission.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.date_admission.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item">
+                <label class="label-input" for="area">Área</label>
+                <select name="area" class="input-style-1" formControlName="area">
+                    <option *ngFor="let area of areas; index as i" value="{{area['key']}}">
+                        {{area['value']}}
+                    </option>
+                </select>
+                <!-- <div *ngIf="employeeForm.controls.area.invalid && (employeeForm.controls.area.dirty || employeeForm.controls.area.touched)"
+                    class="display-errors">
+                    <app-display-errors-validation-input
+                        [type]="employeeForm.controls.area.errors"></app-display-errors-validation-input>
+                </div> -->
+            </div>
+            <div class="container-item"></div>
+
+            <div class="container-btn-send">
+                <button type="submit" [disabled]="!employeeForm.valid||!isIdProductValid">
+                    Enviar
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>
